@@ -23,7 +23,7 @@ Poly::Poly(int G): grau(G), a(nullptr)
   }
   else{ // Parametro maior que 0
     grau = G;
-    a = new double(G+1);
+    a = new double[G+1];
     for(int i=0; i < G; i++) {
         a[i] = 0.0;
     }
@@ -57,7 +57,7 @@ Poly::~Poly()
 // Sobrecarga do operador de atribuição por cópia
 Poly &Poly::operator=(const Poly& P)
 {
-  if (this == &P)return *this;
+  if (this == &P) return *this;
   if(grau != P.grau){
     delete[] a;
     grau = P.grau;
@@ -163,7 +163,6 @@ void Poly::setCoef(int i, double valor){
   else{
     a[i] = valor;
   }
-  return; // A função não retorna nada
 }
 
 //Método recriar - NOT SURE
@@ -189,7 +188,7 @@ double Poly::getValor(double x)const{
   if(this->empty()) return 0.0;
   double soma(0.0);
   for (int i = 0; i <= this->getGrau(); ++i){
-    soma = soma + this->getCoef(i) * x;
+    soma = soma + this->getCoef(i) * pow(x, i);
   }
   return soma;
 }
