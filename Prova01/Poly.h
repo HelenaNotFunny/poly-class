@@ -17,13 +17,14 @@ public:
   ~Poly(); // Destrutor
 
   /// Sobrecarga de operadores
-  Poly &operator=(const Poly& P); // Sobrecarga do operador de atribuição por cópia
-  Poly &operator=(Poly&& P) noexcept; // Sobrecarga do operador de atribuição por movimento
+  Poly& operator=(const Poly& P); // Sobrecarga do operador de atribuição por cópia
+  Poly& operator=(Poly&& P) noexcept; // Sobrecarga do operador de atribuição por movimento
   double operator[](int i) const; // Sobrecarga do operador []
   bool operator==(const Poly& P) const; // Sobrecarga do operador de comparação
   bool operator!=(const Poly& P) const; // Sobrecarga do operador de diferença
   double operator()(double x) const; // Sobrecarga de operador para retornar valor do polinômio
-  friend std::ostream &operator<<(std::ostream& X, const Poly& P); // Sobrecarga do operador de escrita
+  friend std::ostream& operator<<(std::ostream& X, const Poly& P); // Sobrecarga do operador de escrita
+  friend std::istream& operator>>(std::istream& X, Poly& P); // Sobrecarga do operador de leitura
 
   /// Métodos
   int getGrau() const; // Método que retorna o grau de um polinômio

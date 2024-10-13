@@ -55,7 +55,7 @@ Poly::~Poly()
 }
 
 // Sobrecarga do operador de atribuição por cópia
-Poly &Poly::operator=(const Poly& P)
+Poly& Poly::operator=(const Poly& P)
 {
   if (this == &P) return *this;
   if(grau != P.grau){
@@ -71,7 +71,7 @@ Poly &Poly::operator=(const Poly& P)
 }
 
 // Sobrecarga do operador de atribuição por movimento
-Poly &Poly::operator=(Poly&& P) noexcept{
+Poly& Poly::operator=(Poly&& P) noexcept{
   delete[] a; // Libera memória anterior
   // Transferencia do conteúdo
   grau = P.grau;
@@ -109,7 +109,8 @@ double Poly::operator()(double x)const{
   return this->getValor(x);
 }
 
-ostream &operator<<(ostream& X, const Poly& P)
+// Sobrecarga do operador para saída de dados
+ostream& operator<<(ostream& X, const Poly& P)
 {
   if(P.empty()) return X;
   for(int i = P.getGrau(); i >=0; i--){
@@ -134,6 +135,27 @@ ostream &operator<<(ostream& X, const Poly& P)
   }
   return X;
 }
+
+// Sobrecarga do operador para entrada de dados
+istream& operator>>(std::istream& X, Poly& P){
+  if(P.empty()) return X;
+  double coef;
+  for(int i = P.getGrau(); i >= 0; i--){
+    if(i == P.getGrau() && P.getGrau()!= 0){
+      do{
+        cout << "x^" << i << ": ";
+        X >> coef;
+      } while(coef == 0.0);
+      P.setCoef(i, coef);
+    }
+    else{
+      cout << "x^" << i << ": ";
+      X >> coef;
+    }
+  }
+  return X;
+}
+
 
 // Método getGrau
 int Poly::getGrau() const {
