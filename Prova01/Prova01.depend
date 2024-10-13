@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1728832151 source:c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\prova01\teste1.cpp
+	<iostream>
+	<string>
+	"Poly.h"
+
+1728833886 c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\prova01\poly.h
+	<iostream>
+
+1728834675 source:c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\prova01\poly.cpp
+	"Poly.h"
+	<iostream>
+	<string>
+	<cmath>
+
+1728832968 source:c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\prova01\teste2.cpp
+	<iostream>
+	<string>
+	<cmath>
+	"Poly.h"
+
