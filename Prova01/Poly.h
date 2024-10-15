@@ -20,12 +20,14 @@ public:
   /// Sobrecarga de operadores
   Poly& operator=(const Poly& P); // Sobrecarga do operador de atribuição por cópia
   Poly& operator=(Poly&& P) noexcept; // Sobrecarga do operador de atribuição por movimento
-  double operator[](int i) const; // Sobrecarga do operador []
+  double operator[](int i) const; // Sobrecarga do operador [] (getCoef)
   bool operator==(const Poly& P) const; // Sobrecarga do operador de comparação
   bool operator!=(const Poly& P) const; // Sobrecarga do operador de diferença
   double operator()(double x) const; // Sobrecarga de operador para retornar valor do polinômio
-  friend std::ostream& operator<<(std::ostream& X, const Poly& P); // Sobrecarga do operador de escrita
-  friend std::istream& operator>>(std::istream& X, Poly& P); // Sobrecarga do operador de leitura
+  friend std::ostream& operator<<(std::ostream& X, const Poly& P); // Sobrecarga do operador de saída de dados
+  friend std::istream& operator>>(std::istream& X, Poly& P); // Sobrecarga do operador de entrada de dados
+  Poly operator-() const; // Sobrecarga do operador - unário (retorna o negativo de um polinômio)
+  Poly operator+(const Poly& P) const; // Sobrecarga do operador + binário (soma)
 
   /// Métodos
   int getGrau() const; // Método que retorna o grau de um polinômio
@@ -36,5 +38,6 @@ public:
   bool isZero() const; // Método que retorna se é um polinômio nulo
   double getValor(double x) const; // Método que retorna o valor do polinômio para um parâmetro x
   bool salvar(const std::string& nomeArquivo) const; // Método para salvar polinômio em arquivo
+  bool ler(const std::string& nomeArquivo); // Método para ler um polinômio de um arquivo
 };
 #endif //#ifndef POLY_H_

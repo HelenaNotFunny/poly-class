@@ -153,6 +153,21 @@ istream& operator>>(std::istream& X, Poly& P){
   return X;
 }
 
+// Sobrecarga do operador - unário
+Poly Poly::operator-() const{
+  if(this->empty()) return *this; // O negativo de um vazio é vazio
+
+  Poly prov(grau);
+  for(int i = 0; i <=grau; ++i){
+    prov.a[i] = - this->a[i]; // Adiciona o negativo dos coefiecientes na prov
+  }
+  return prov;
+}
+
+// Sobrecarga do operador + binário
+Poly Poly::operator+(const Poly& P) const{
+
+}
 
 // Método getGrau
 int Poly::getGrau() const {
@@ -225,5 +240,28 @@ bool Poly::salvar(const string& nomeArquivo) const
     arquivo << a[i] << " ";
   }
   arquivo << endl;
+  return true;
+}
+
+bool Poly::ler(const std::string& nomeArquivo){
+ifstream arquivo(nomeArquivo);
+  if (!arquivo.is_open()) return false; // Retorna falso caso o arquvo não seja aberto
+
+  string cabecalho;
+  arquivo >> cabecalho; // Entrada do cabeçalho
+  if (!arquivo || cabecalho!="POLY") return false; // Teste da leitura do arquivo e do cabeçalho correto
+
+  int grauPolinomio;
+  arquivo >> grauPolinomio; // Entrada do grau do polinômio
+  if(!arquivo) return false; // erro na leitura
+  Poly prov(grauPolinomio); // Polinomio provisorio
+
+  if(grauPolinomio < 0) return true; // Se o grau for negativo, não há mais nada a ser lido
+  for(int i = 0; i <= grauPolinomio; ++i){
+    arquivo >> prov.a[i]; // entrada dos coeficientes
+    if(!arquivo) return false;
+  }
+  if(prov.a[grauPolinomio] == 0.0 && grauPolinomio != 0) return false; // Teste se o polinômio é valido
+  *this = move(prov);
   return true;
 }
