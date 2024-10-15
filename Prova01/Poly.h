@@ -15,6 +15,7 @@ public:
   Poly(const Poly& P); // Construtor por cópia
   Poly(Poly&& P) noexcept;// Construtor por movimento
   ~Poly(); // Destrutor
+  // Criar função void clear?
 
   /// Sobrecarga de operadores
   Poly& operator=(const Poly& P); // Sobrecarga do operador de atribuição por cópia
@@ -34,5 +35,6 @@ public:
   bool empty() const; // Método que retorna true se polinomio vazio
   bool isZero() const; // Método que retorna se é um polinômio nulo
   double getValor(double x) const; // Método que retorna o valor do polinômio para um parâmetro x
+  bool salvar(const std::string& nomeArquivo) const; // Método para salvar polinômio em arquivo
 };
 #endif //#ifndef POLY_H_

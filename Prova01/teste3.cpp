@@ -16,7 +16,7 @@ int main(void)
   cout << "POLY -1" << endl;
   cout << "============\n";
   cout << PVaz;
-  //if (!PVaz.salvar("pvaz.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
+  if (!PVaz.salvar("pvaz.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
 
   cout << "\nTestando digitacao de polinomio grau 0 nulo. Deve imprimir x^0:\n";
   cout << "Voce deve digitar um valor 0.0 para esse coeficiente.\n";
@@ -28,7 +28,7 @@ int main(void)
   cout << "POLY 0\n0" << endl;
   cout << "============\n";
   cout << P0;
-  //if (!P0.salvar("pnulo.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
+  if (!P0.salvar("pnulo.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
 
   cout << "\nTestando digitacao de polinomio grau 0 nao nulo. Deve imprimir x^0:\n";
   cout << "Voce deve digitar um valor -1 para esse coeficiente.\n";
@@ -40,7 +40,7 @@ int main(void)
   cout << "POLY 0\n-1" << endl;
   cout << "============\n";
   cout << P0;
-  //if (!P0.salvar("p0.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
+  if (!P0.salvar("p0.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
 
   cout << "\nTestando digitacao de polinomio grau 2. Deve imprimir x^2, depois x^1: depois x^0:\n";
   cout << "Voce deve tentar digitar um valor 0.0 para o coeficiente de maior grau (x^2).\n";
@@ -53,7 +53,7 @@ int main(void)
   cout << "============\n";
   cout << "POLY 2\n0 0 1" << endl;
   cout << "============\n";
-  //if (!P2.salvar("p2.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
+  if (!P2.salvar("p2.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
 
   cout << "\nTestando digitacao de polinomio grau 2. Deve imprimir x^2, depois x^1: depois x^0:\n";
   cout << "Voce deve digitar os valor 2.5, 1.5 e 0.5, nessa ordem, para os coeficientes.\n";
@@ -64,7 +64,7 @@ int main(void)
   cout << "============\n";
   cout << "POLY 2\n0.5 1.5 2.5" << endl;
   cout << "============\n";
-  //if (!P2.salvar("p2.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
+  if (!P2.salvar("p2.txt")) cerr << "ERRO NO SALVAMENTO!!\n";
 
   return 0;
 }

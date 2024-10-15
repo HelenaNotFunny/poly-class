@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <fstream>
 
 using namespace std;
 
@@ -25,9 +26,9 @@ Poly::Poly(int G): grau(G), a(nullptr)
     grau = G;
     a = new double[G+1];
     for(int i=0; i < G; i++) {
-        a[i] = 0.0;
+        a[i] = 0.0; // Atribue zero a todos os coeficientes que não sejam o a maior
     }
-    a[G] = 1.0;
+    a[G] = 1.0; // Atribui 1.0 ao coeficiente de maior grau
   }
 }
 
@@ -84,24 +85,24 @@ Poly& Poly::operator=(Poly&& P) noexcept{
 
 //Sobrecarga do operador []
 double Poly::operator[](int i) const{
-  return this->getCoef(i);
+  return this->getCoef(i); // Operador que retorna a mesma coisa de getCoef
 }
 
 // Sobrecarga do operador de comparação
 bool Poly::operator==(const Poly& P)const{
-  if (this->grau == P.grau){
+  if (this->grau == P.grau){ // Checar se os graus são iguais
     for(int i = 0; i < P.grau; i++){
-      if(this->a[i] != P.a[i]) return false;
+      if(this->a[i] != P.a[i]) return false; // Compara se os coeficientes são diferentes e retorna false caso sejam
     }
-    return true;
+    return true; // Retorna true se todos os coeficientes forem iguais
   }
-  return false;
+  return false; // Retorna falso se os graus não forem iguais
 }
 
 // Sobrecarga do operador de diferença
 bool Poly::operator!=(const Poly& P)const{
-  if(*this == P) return false;
-  return true;
+  if(*this == P) return false; // Retorna falso se os polinomios forem iguais
+  return true; // Retorna true em todos os outros casos
 }
 
 // Sobrecarga do operador ()
@@ -112,7 +113,8 @@ double Poly::operator()(double x)const{
 // Sobrecarga do operador para saída de dados
 ostream& operator<<(ostream& X, const Poly& P)
 {
-  if(P.empty()) return X;
+  if(P.empty()) return X; // Se o polinômio for vazio, retorna nada
+
   for(int i = P.getGrau(); i >=0; i--){
     if(P[i]== 0.0){
       if(i==0 && P.getGrau()==0) X << P[i];
@@ -138,19 +140,14 @@ ostream& operator<<(ostream& X, const Poly& P)
 
 // Sobrecarga do operador para entrada de dados
 istream& operator>>(std::istream& X, Poly& P){
-  if(P.empty()) return X;
-  double coef;
-  for(int i = P.getGrau(); i >= 0; i--){
-    if(i == P.getGrau() && P.getGrau()!= 0){
-      do{
-        cout << "x^" << i << ": ";
-        X >> coef;
-      } while(coef == 0.0);
-      P.setCoef(i, coef);
-    }
-    else{
+  if(P.empty()) return X; // Se o polinômio for vazio, retorna nada
+
+  for(int i = P.getGrau(); i >= 0; i--){ // For que corre pelos coeficientes
+    cout << "x^" << i << ": ";
+    X >> P.a[i]; // Entrada de dados
+    while(i== P.getGrau() && P.getGrau() != 0 && P.a[i] == 0.0){ // Checagem se o maior coeficiente é zero
       cout << "x^" << i << ": ";
-      X >> coef;
+      X >> P.a[i];
     }
   }
   return X;
@@ -189,25 +186,27 @@ void Poly::setCoef(int i, double valor){
 
 //Método recriar - NOT SURE
 void Poly::recriar(int novoGrau){
-  Poly prov(novoGrau);
-  *this = move(prov);
+  //Poly prov(novoGrau); // Poly provisorio criado com o construtor específico
+  //*this = move(prov);
+  *this = move(Poly(novoGrau)); // move não é necessário nesse caso
 }
 
 // Método empty
 bool Poly::empty()const{
-  if(this->getGrau() < 0) return true;
-  return false;
+  if(this->getGrau() < 0) return true; // Retorna true se grau negativos
+  return false; // Retorna false em todos os outros casos
 }
 
 // Método isZero
 bool Poly::isZero()const{
-  if(this->getGrau() == 0 && this->getCoef(0)==0.0) return true;
-  return false;
+  if(this->getGrau() == 0 && this->getCoef(0)==0.0) return true; // Retorna true se grau zero e coeficinte zero
+  return false; // Retorna false em todos os outros casos
 }
 
 // Método getValor
 double Poly::getValor(double x)const{
   if(this->empty()) return 0.0;
+
   double soma(0.0);
   for (int i = 0; i <= this->getGrau(); ++i){
     soma = soma + this->getCoef(i) * pow(x, i);
@@ -215,3 +214,16 @@ double Poly::getValor(double x)const{
   return soma;
 }
 
+// Método salvar
+bool Poly::salvar(const string& nomeArquivo) const
+{
+  ofstream arquivo(nomeArquivo);
+  if (!arquivo.is_open()) return false; // Teste para ver se o arquivo foi aberto
+
+  arquivo << "POLY " << grau << endl;
+  for(int i = 0; i<=grau; i++){
+    arquivo << a[i] << " ";
+  }
+  arquivo << endl;
+  return true;
+}
