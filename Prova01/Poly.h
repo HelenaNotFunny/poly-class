@@ -28,6 +28,7 @@ public:
   friend std::istream& operator>>(std::istream& X, Poly& P); // Sobrecarga do operador de entrada de dados
   Poly operator-() const; // Sobrecarga do operador - unário (retorna o negativo de um polinômio)
   Poly operator+(const Poly& P) const; // Sobrecarga do operador + binário (soma)
+  Poly operator-(const Poly& P) const; // Sobrecarga do operador - binário (subtração)
 
   /// Métodos
   int getGrau() const; // Método que retorna o grau de um polinômio

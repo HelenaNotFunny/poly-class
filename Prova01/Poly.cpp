@@ -159,14 +159,39 @@ Poly Poly::operator-() const{
 
   Poly prov(grau);
   for(int i = 0; i <=grau; ++i){
-    prov.a[i] = - this->a[i]; // Adiciona o negativo dos coefiecientes na prov
+    prov.a[i] = - this->a[i]; // Adiciona o negativo dos coefiecientes na prov - posso usar o set coef?
   }
   return prov;
 }
 
 // Sobrecarga do operador + binário
 Poly Poly::operator+(const Poly& P) const{
+  if(this->empty()) return P; // Soma com empty retorna o outro polinômio
+  if(P.empty()) return *this;
+  // else
+  if(this->isZero()) return P;  // Soma com nulo (exceto empty) retorna o outro polinômio
+  if(P.isZero()) return *this;
 
+  int maiorGrau;
+  maiorGrau = max(this->getGrau(), P.getGrau());
+  Poly subtracao(maiorGrau);
+  for(int i = 0; i <= maiorGrau; ++i){
+    subtracao.a[i] = this->getCoef(i) + P[i]; // ver se tem como usar os colchetes no this
+  }
+  // precisa testar o polinomio provisorio
+  Poly prov = subtracao;
+  while(subtracao.getCoef(maiorGrau) == 0.0 & maiorGrau!= 0){
+    maiorGrau -= 1;
+    subtracao.recriar(maiorGrau);
+    for(int i = 0; i <= maiorGrau; ++i){
+      subtracao.a[i] = prov[i];
+    }
+  }
+  return subtracao;
+}
+
+Poly Poly::operator-(const Poly &P) const{
+  return operator+(-P);
 }
 
 // Método getGrau
