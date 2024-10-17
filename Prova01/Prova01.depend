@@ -26,7 +26,7 @@
 	<cmath>
 	<fstream>
 
-1729086059 c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\poly-class\prova01\poly.h
+1729122543 c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\poly-class\prova01\poly.h
 	<iostream>
 
 1728848594 source:c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\poly-class\prova01\teste2.cpp
@@ -45,6 +45,11 @@
 	"Poly.h"
 
 1727965953 source:c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\poly-class\prova01\teste5.cpp
+	<iostream>
+	<string>
+	"Poly.h"
+
+1727965953 source:c:\users\mh330\documents\acadêmico\2024.2\programação avançada\prova1\poly-class\prova01\teste6.cpp
 	<iostream>
 	<string>
 	"Poly.h"

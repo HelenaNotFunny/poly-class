@@ -29,6 +29,7 @@ public:
   Poly operator-() const; // Sobrecarga do operador - unário (retorna o negativo de um polinômio)
   Poly operator+(const Poly& P) const; // Sobrecarga do operador + binário (soma)
   Poly operator-(const Poly& P) const; // Sobrecarga do operador - binário (subtração)
+  Poly operator*(const Poly& P) const; // Sobrecarga do operador * binário (multiplicação)
 
   /// Métodos
   int getGrau() const; // Método que retorna o grau de um polinômio

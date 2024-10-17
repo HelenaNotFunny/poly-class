@@ -180,7 +180,7 @@ Poly Poly::operator+(const Poly& P) const{
   }
   // precisa testar o polinomio provisorio
   Poly prov = subtracao;
-  while(subtracao.getCoef(maiorGrau) == 0.0 & maiorGrau!= 0){
+  while(subtracao.getCoef(maiorGrau) == 0.0 && maiorGrau!= 0){
     maiorGrau -= 1;
     subtracao.recriar(maiorGrau);
     for(int i = 0; i <= maiorGrau; ++i){
@@ -192,6 +192,23 @@ Poly Poly::operator+(const Poly& P) const{
 
 Poly Poly::operator-(const Poly &P) const{
   return operator+(-P);
+}
+
+Poly Poly::operator*(const Poly& P) const{
+  if(this->empty()) return *this; // Multiplicação com empty retorna o outro polinômio
+  if(P.empty()) return P;
+
+  if(this->isZero()) return *this;  // Multiplicação com nulo retorna o outro polinômio
+  if(P.isZero()) return P;
+
+  Poly prov(P.getGrau() + this->getGrau());
+  prov.a[prov.getGrau()] = 0.0; // Inicializar prov com zeros
+  for(int i = 0; i <= this->getGrau(); ++i){
+      for(int j = 0; j <= P.getGrau(); ++j){
+        prov.a[i+j] = prov[i+j] + this->getCoef(i) * P[j];
+      }
+  }
+  return prov;
 }
 
 // Método getGrau
